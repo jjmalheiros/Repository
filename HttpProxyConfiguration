@@ -1,0 +1,56 @@
+package com.avaldes.util;
+
+public class HttpProxyConfiguration {
+	
+	private String proxyHost;
+
+	private int proxyPort;
+
+	private boolean authRequired;
+
+	private String username;
+
+	private String password;
+	
+	private String d;
+	
+	
+
+	public HttpProxyConfiguration() {
+		super();
+	}
+
+	public HttpProxyConfiguration(String proxyHost, int proxyPort) {
+		this(proxyHost, proxyPort, false, null, null);
+	}
+
+	public HttpProxyConfiguration (String proxyHost, int proxyPort,	boolean authRequired, String username, String password) {
+		
+		this.proxyHost = proxyHost;
+		this.proxyPort = proxyPort;
+		this.authRequired = authRequired;
+		this.username = username;
+		this.password = password;
+	}
+
+	public String getProxyHost() {
+		return proxyHost;
+	}
+
+	public int getProxyPort() {
+		return proxyPort;
+	}
+
+	public boolean isAuthRequired() {
+	    return authRequired;
+	}
+
+	public String getUsername() {
+	    return username;
+	}
+
+	public String getPassword() {
+	    return password;
+	}
+
+}
