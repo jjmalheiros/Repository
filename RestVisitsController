@@ -11,11 +11,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 
+
+
+
+
+
+
+
+
+
+import com.avaldes.model.Page;
 import com.avaldes.util.RestUtil;
 
 
 @Controller
 public class RestVisitsController {
+	
+	
+	
 	//protected static Logger logger = Logger.getLogger("controller");
 	
 	private String baseURL = "http://localhost:8080/spring-rest-provider/service/";
@@ -35,13 +48,12 @@ public class RestVisitsController {
 	public @ResponseBody String getVisits(@PathVariable("ids") String ids) {
 		//logger.debug("Retrieve all persons");
 		
-		
 		com.avaldes.util.HttpProxyConfiguration httpProxyConfiguration =new com.avaldes.util.HttpProxyConfiguration(PROXY_HOST, PROXY_PORT, true, PROXY_USER,  PROXY_PASSWORD);
 		
 		RestUtil restUtil = new RestUtil ();
 		
 		restTemplate =   restUtil.createRestTemplate(httpProxyConfiguration, false)	;	
-            
+
 		try {
 			
 			ResponseEntity<String> responses = restTemplate.exchange("https://api.mercadolibre.com/visits/items?"+ids, HttpMethod.GET, null, String.class);
@@ -59,6 +71,37 @@ public class RestVisitsController {
 		
 		// This will resolve to /WEB-INF/jsp/personspage.jsp
 		return "personspage";
+	}
+	
+	
+	/**
+	 * Retrieves all visits from the REST provider
+	 * and displays the records in a JSP page
+	 */
+	@RequestMapping(value = "/getListItems/{q}", method = RequestMethod.GET)
+	public @ResponseBody Page getListItems(@PathVariable("q") String palavrasChave) {
+		//logger.debug("Retrieve all persons");
+		
+		com.avaldes.util.HttpProxyConfiguration httpProxyConfiguration =new com.avaldes.util.HttpProxyConfiguration(PROXY_HOST, PROXY_PORT, true, PROXY_USER,  PROXY_PASSWORD);
+		
+		RestUtil restUtil = new RestUtil ();
+		
+		restTemplate =   restUtil.createRestTemplate(httpProxyConfiguration, false)	;	
+
+		try {
+			
+			Page page = restTemplate.getForObject("https://api.mercadolibre.com/sites/MLB/search?"+palavrasChave,  Page.class);
+
+			System.out.println(page);
+					
+			return page;
+			
+		} catch (Exception e) {
+			//logger.error(e);
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 
