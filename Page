@@ -2,12 +2,13 @@ package com.avaldes.model;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Page {
 	
 	private String query;
-	private Integer total;
+	private Paging paging;
 	
 	@JsonProperty("results")
 	private List<Item> items;
@@ -23,14 +24,20 @@ public class Page {
 		this.query = query;
 	}
 
-	public Integer getTotal() {
-		return total;
+	public Paging getPaging() {
+		return paging;
 	}
 
-	public void setTotal(Integer total) {
-		this.total = total;
+	public void setPaging(Paging paging) {
+		this.paging = paging;
 	}
-	
-	
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
 
 }
