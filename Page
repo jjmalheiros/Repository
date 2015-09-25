@@ -1,0 +1,36 @@
+package com.avaldes.model;
+
+import java.util.List;
+
+import org.codehaus.jackson.annotate.JsonProperty;
+
+public class Page {
+	
+	private String query;
+	private Integer total;
+	
+	@JsonProperty("results")
+	private List<Item> items;
+
+	public Page() {
+	}
+
+	public String getQuery() {
+		return query;
+	}
+
+	public void setQuery(String query) {
+		this.query = query;
+	}
+
+	public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
+	
+	
+
+}
