@@ -9,6 +9,7 @@ public class Item {
 	
 	private String id;
 	private String title;
+	private Integer visits;
 	private Double price;
 	@JsonProperty("sold_quantity")
 	private Integer SoldQuantity;
@@ -58,6 +59,14 @@ public class Item {
 
 	public void setAvailableQuantity(Integer availableQuantity) {
 		AvailableQuantity = availableQuantity;
+	}
+
+	public Integer getVisits() {
+		return visits;
+	}
+
+	public void setVisits(Integer visits) {
+		this.visits = visits;
 	}
 	
 	
