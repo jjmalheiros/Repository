@@ -1,0 +1,17 @@
+package com.avaldes.model;
+
+import java.util.Date;
+
+public class Search {
+	
+	private String query;
+	private Integer orders;
+	private Integer visits;
+	private Date createdDate;
+	private Integer itemsQuantity;
+
+	public Search() {
+		// TODO Auto-generated constructor stub
+	}
+
+}
