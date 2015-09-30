@@ -1,6 +1,8 @@
 package com.avaldes.controller;
 
 
+import java.util.List;
+
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,8 @@ import org.springframework.web.client.RestTemplate;
 
 
 
+
+import com.avaldes.model.Item;
 import com.avaldes.model.Page;
 import com.avaldes.util.RestUtil;
 
@@ -91,6 +95,7 @@ public class RestVisitsController {
 		try {
 			
 			Page page = restTemplate.getForObject("https://api.mercadolibre.com/sites/MLB/search?"+palavrasChave,  Page.class);
+			fillVisitsQuantity(page);
 
 			System.out.println(page);
 					
@@ -102,6 +107,20 @@ public class RestVisitsController {
 		}
 		return null;
 
+	}
+	
+	private void fillVisitsQuantity(Page page){
+		
+		List<Item> items = page.getItems();
+		int visitQuantity=0;
+		StringBuilder id = new StringBuilder();
+		for(Item item :items){
+			id.append("ids="+item.getId());
+			visitQuantity=Integer.parseInt(getVisits(id.toString()));
+			item.setVisits(visitQuantity);
+			id.replace(0,id.length(), "");
+		}
+		
 	}
 
 
